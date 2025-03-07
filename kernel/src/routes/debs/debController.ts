@@ -1,13 +1,13 @@
-import express, { Router, Request, Response, NextFunction } from 'express'
+import { Router, Request, Response, NextFunction } from 'express'
 import { IDeb } from '../../domain/schema/debSchema'
 import { closeDeb, createDeb, getDeb, getUserDebs, intakeMoney, purchaseMoney, transferMoney, updateDeb } from '../../services/debService'
-import { authentication, getUserId } from '../../middlewares/auth'
+import {  authentificate, getUserId } from '../../middlewares/auth'
 
 const router = Router()
 
 type IDebModel = Omit<IDeb, "id" | "createdAt" | "amount">
 
-// router.use(authentication)
+router.use(authentificate)
 
 // create deb
 router.post('/', async (req: Request<{}, {}, IDebModel>, res: Response,  next: NextFunction) => {

@@ -1,10 +1,10 @@
 import express, { Router, Request, Response, NextFunction } from 'express'
 import {closeDeb, getDeb, getFilteredDebs, getUserDebs } from '../../services/adminDebService'
-import { authentication } from '../../middlewares/auth'
+import { authentificate, authentificateAdmin } from '../../middlewares/auth';
 
 const router = Router()
 
-// router.use(authentication)
+router.use(authentificateAdmin)
 
 router.get('/deb', async (req: Request<any, {userId?: string, debId?: string }>, res: Response,  next: NextFunction) => {
       const userId = req.params.userId
