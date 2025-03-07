@@ -6,9 +6,9 @@ const router = Router()
 
 router.use(authentificateAdmin)
 
-router.get('/deb', async (req: Request<any, {userId?: string, debId?: string }>, res: Response,  next: NextFunction) => {
-      const userId = req.params.userId
-      const debId = req.params.debId
+router.get('/deb', async (req: Request<{}, {}, {}, {userId?: string, debId?: string }>, res: Response,  next: NextFunction) => {
+      const userId = req.query.userId
+      const debId = req.query.debId
       const createdDeb = await getFilteredDebs(userId, debId)
       res.status(201).send(createdDeb)
       next()
